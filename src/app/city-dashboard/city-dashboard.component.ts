@@ -3,12 +3,12 @@ import { CurrentCondition } from "src/types/CurrentConditiona.interface";
 import { LocationService } from "../services/location.service";
 
 @Component({
-    selector: 'app-country-dashboard',
-    templateUrl: './country-dashboard.component.html',
-    styleUrls: ['./country-dashboard.component.scss']
+    selector: 'app-city-dashboard',
+    templateUrl: './city-dashboard.component.html',
+    styleUrls: ['./city-dashboard.component.scss']
 })
 
-export class CountryDashboardComponent{
+export class CityDashboardComponent{
     country: string='';
     currentCondition= {} as CurrentCondition;
 

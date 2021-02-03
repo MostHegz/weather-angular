@@ -4,12 +4,13 @@ import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 import { switchMap , share } from "rxjs/operators";
 import { IPData } from "src/types/IPData.interface";
+import { WeatherData } from "src/types/WeatherData.Interface";
 
 @Injectable()
 export class LocationService{
     locationObservable: Observable<IPData> = this.getLocationByIP();
 
-    weatherObservable = this.locationObservable
+    weatherObservable: Observable<WeatherData> = this.locationObservable
         .pipe(
             switchMap((ipData: IPData) =>
                 {
@@ -27,8 +28,7 @@ export class LocationService{
     }
 
     getWeather(ipAddress: string){
-        console.log(ipAddress)
-        return this.http.get(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.weatherApiKey}&q=${ipAddress}&num_of_days=1&includelocation=yes&fx=no&format=json`)
+        return this.http.get<WeatherData>(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.weatherApiKey}&q=${ipAddress}&num_of_days=1&includelocation=yes&fx=no&mca=no&format=json`)
     }
 }
 
