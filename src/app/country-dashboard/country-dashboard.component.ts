@@ -9,13 +9,14 @@ import { LocationService } from "../services/location.service";
 
 export class CountryDashboardComponent{
     constructor(private location: LocationService){}
-    ipAddress:string=''; 
+    
     ngOnInit(){
-        this.location.getLocation().subscribe((res:any)=>{
-            //location handler (might even make the location service a weather service)
-        });
+        // this.location.locationObservable.subscribe(data=>{
+        //     console.log(data)
+        // });
+        this.location.weatherObservable.subscribe(data=> console.log(data))
+        };
         // this.loc.getUserLocation(this.ipAddress).subscribe((data)=>{
         //     console.log('weather data', data);
         // })
-    }
 }
