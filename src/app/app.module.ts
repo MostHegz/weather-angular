@@ -12,8 +12,9 @@ import {LocationService} from './services/location.service';
 // import { NotFound } from './not-found/notfound.component';
 // import { NavBarComponent } from './navbar/navbar.component';
 import {NavBarModule} from './navbar/navbar.module';
-import {NotFoundModule} from './not-found/notfound.module'
-
+import {NotFoundModule} from './not-found/notfound.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MaterialModule } from './material.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +26,9 @@ import {NotFoundModule} from './not-found/notfound.module'
     CountryDashboardModule,
     CityDashboardModule,
     NotFoundModule,
-    NavBarModule
+    NavBarModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [LocationService],
   bootstrap: [AppComponent]
