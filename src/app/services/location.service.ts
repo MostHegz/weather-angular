@@ -10,28 +10,30 @@ import { searchApiInterface } from "src/types/searchApi.interface";
 @Injectable()
 export class LocationService{
     locationObservable: Observable<IPData> = this.getLocationByIP();
-    // searchStream = new Subject<string>();
-    weatherObservable: Observable<WeatherData> = this.locationObservable
+    weatherObservableFromIp: Observable<WeatherData> = this.locationObservable
         .pipe(
             switchMap((ipData: IPData) =>
                 {
-                    return this.getWeather(ipData.ip);
+                    return this.getWeatherByIp(ipData.ip);
                 }
             ),
             share()
     )
+
+    // weatherObservablefromCity: Observable<WeatherData> = this.getWeatherByLocation();
+
     constructor(private http:HttpClient){}
-    
-    // onSearchLocation(cityName: string){
-    //     this.searchStream.next(cityName);
-    // }
-    
+        
     getLocationByIP(){
         return this.http
             .get<IPData>(`https://geo.ipify.org/api/v1?apiKey=${environment.ipApiKey}`);
     }
-
-    getWeather(ipAddress: string){
+    getWeatherByLocation(city: string, country: string){
+        return this.http
+            .get<WeatherData>(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.weatherApiKey}&q=${city},${country}&num_of_days=1&includelocation=yes&fx=no&mca=no&extra=isDayTime&format=json`)
+            .pipe(share())
+    }
+    getWeatherByIp(ipAddress: string){
         return this.http.get<WeatherData>(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.weatherApiKey}&q=${ipAddress}&num_of_days=1&includelocation=yes&fx=no&mca=no&extra=isDayTime&format=json`)
     }
 

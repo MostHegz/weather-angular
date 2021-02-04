@@ -15,11 +15,10 @@ export class CityDashboardComponent{
     constructor(private location: LocationService){}
     
     ngOnInit(){
-        this.location.weatherObservable.subscribe(weatherData=>
+        this.location.weatherObservableFromIp.subscribe(weatherData=>
             {
                 this.country=weatherData.data.nearest_area[0].country[0].value
                 this.currentCondition = weatherData.data.current_condition[0];
-                console.log(this.currentCondition)
             }
         )
     };
