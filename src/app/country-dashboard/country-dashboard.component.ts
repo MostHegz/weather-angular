@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CurrentCondition } from "src/types/CurrentConditiona.interface";
+import { CurrentCondition } from "src/types/CurrentConditions.interface";
 import { LocationService } from "../services/location.service";
 
 @Component({

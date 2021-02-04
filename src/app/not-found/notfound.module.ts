@@ -8,4 +8,4 @@ import { NotFound } from "./notfound.component";
     exports: [NotFound]
 })
 
-export class CountryDashboardModule {}
+export class NotFoundModule {}

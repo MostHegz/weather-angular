@@ -1,6 +1,7 @@
 export interface CurrentCondition
 {
     observation_time: string,
+    isdaytime: string,
     temp_C: string,
     temp_F: string,
     weatherCode: string,

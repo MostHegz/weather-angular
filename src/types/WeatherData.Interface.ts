@@ -1,4 +1,4 @@
-import { CurrentCondition } from "./CurrentConditiona.interface";
+import { CurrentCondition } from "./CurrentConditions.interface";
 
 export interface WeatherData{
     data: {

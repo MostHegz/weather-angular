@@ -1,1 +1,18 @@
-<h1>Country Dashboard</h1>
+<div 
+    [ngClass]="(currentCondition.isdaytime==='yes')?'day':(currentCondition.isdaytime==='no')? 'night' : 'loading'" 
+    id="divWeatherMain"
+> 
+    <div  class="weatherWidgetRow">
+        <img [src]="currentCondition.weatherIconUrl[0].value">
+    </div>   
+    
+    <!-- <div class="weatherWidgetRow cloudDiv">
+        <i class="fas fa-cloud fa-3x cloud"></i>
+    </div> -->
+    <div class="weatherWidgetRow" style="font-size: 50px;margin-top: 5px;font-weight: bold;">{{currentCondition.temp_C}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 20px;margin-top: 5px;">{{currentCondition.weatherDesc[0].value}}</div>
+    <!-- <div class="weatherWidgetRow" style="font-size: 12px;">{{currentCondition.temp_min}}° / {{currentCondition.temp_max}}°</div> -->
+    <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{currentCondition.FeelsLikeC}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{currentCondition.humidity}}%</div>
+    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{country}}</div>
+</div>
