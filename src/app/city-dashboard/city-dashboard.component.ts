@@ -36,6 +36,7 @@ export class CityDashboardComponent{
             return this.location.getClimateAveragesByLocation(params['city'],params['country'])
             })
         ).subscribe(data =>{
+            this.setLocation(data)
             this.setCurrentConditions(data);
             this.setMonthlyClimateAverages(data);
             this.setWholeDaysWeather(data)
@@ -48,9 +49,11 @@ export class CityDashboardComponent{
     setWholeDaysWeather(data:AverageClimateData){
         this.wholeDaysWeather = data.data.weather;
     }
+    setLocation(data: AverageClimateData){
+        this.country=data.data.nearest_area[0].country[0].value;
+        this.city = data.data.nearest_area[0].areaName[0].value;
+    }
     setCurrentConditions(weatherData: WeatherData){
-        this.country=weatherData.data.nearest_area[0].country[0].value;
-        this.city = weatherData.data.nearest_area[0].areaName[0].value;
         this.currentCondition = weatherData.data.current_condition[0];
         // this.weatherIconUrl = weatherData.data.current_condition[0].weatherIconUrl[0].value;
         // this.weatherDescription = weatherData.data.current_condition[0].weatherDesc[0].value;
