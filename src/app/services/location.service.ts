@@ -6,6 +6,7 @@ import { switchMap , share } from "rxjs/operators";
 import { IPData } from "src/types/IPData.interface";
 import { WeatherData } from "src/types/WeatherData.Interface";
 import { searchApiInterface } from "src/types/searchApi.interface";
+import { AverageClimateData } from "src/types/AverageClimateData.interface";
 
 @Injectable()
 export class LocationService{
@@ -36,7 +37,11 @@ export class LocationService{
     getWeatherByIp(ipAddress: string){
         return this.http.get<WeatherData>(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.weatherApiKey}&q=${ipAddress}&num_of_days=1&includelocation=yes&fx=no&mca=no&extra=isDayTime&format=json`)
     }
-
+    getClimateAveragesByLocation(city: string, country: string){
+        return this.http
+            .get<AverageClimateData>(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.weatherApiKey}&q=${city},${country}&format=json&num_of_days=2&fx=yes&mca=yes&includelocation=yes`)
+            .pipe(share())
+    }
     getSearchLocation(country: string, city: string){
         return this.http
             .get<searchApiInterface>(`http://api.worldweatheronline.com/premium/v1/search.ashx?key=${environment.weatherApiKey}&q=${city},${country}&format=json&num_of_results=50`)
