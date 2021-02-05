@@ -38,7 +38,7 @@
                   formControlName="city"
                   placeholder="Choose a City"
                   matInput
-                  [value] = "city"
+                  [value] = "formCity"
                   [formControl]="myControl"
                   [matAutocomplete]="auto">
           <mat-error>Must be a valid City</mat-error>
@@ -55,7 +55,7 @@
           class="home-button"
           color="primary"
           (click)="updateCurrentConditions()" 
-          [disabled]="!myControl.valid"
+          [disabled]="!myControl.valid||formCity!==cityOptions[0]"
         > 
           Update
         </button>
@@ -63,7 +63,7 @@
           mat-raised-button 
           class="home-button"
           color="primary" 
-          [disabled]="!myControl.valid"
+          [disabled]="!myControl.valid||formCity!==cityOptions[0]"
           [routerLink]="['/dashboard']" 
           [queryParams]="{city: this.city,country: this.country}"
         > 
