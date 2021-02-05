@@ -34,6 +34,7 @@ export class LineChart implements OnChanges {
     // only run when property "dataset" changed
     if (changes['dataset']) {
         if(this.dataset.length){
+            // d3.select("svg").remove();
             this.maximumVertical = this.findMaxDrawnVertical(this.dataset, this.extraSpace)
             this.minimumVertical = this.findMinDrawnVertical(this.dataset, this.extraSpace)
             this.initChart();
@@ -144,6 +145,4 @@ export class LineChart implements OnChanges {
   //       })
   //     .on("mouseout", function () { })
   }
-  
-
 }

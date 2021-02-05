@@ -1,5 +1,5 @@
 import { CurrentCondition } from "./CurrentConditions.interface";
-import { DayWeather } from "./dayWeather.interface";
+import { DayWeather } from "./DayWeather.interface";
 import { MonthlyClimate } from "./MonthlyClimate.interface";
 
 export interface AverageClimateData{

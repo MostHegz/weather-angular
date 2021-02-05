@@ -1,4 +1,4 @@
 export interface LineChartData {
-    x: number,
+    x: any,
     y: number
 }

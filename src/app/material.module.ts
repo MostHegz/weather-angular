@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatButtonModule,
         MatProgressSpinnerModule,
         MatToolbarModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonToggleModule
     ],
     exports: [
         MatAutocompleteModule,
@@ -34,7 +36,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatButtonModule,
         MatProgressSpinnerModule,
         MatToolbarModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonToggleModule
     ]
 })
 export class MaterialModule{}

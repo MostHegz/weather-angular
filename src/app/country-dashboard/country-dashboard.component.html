@@ -65,7 +65,7 @@
           color="primary" 
           [disabled]="!myControl.valid||formCity!==cityOptions[0]"
           [routerLink]="['/dashboard']" 
-          [queryParams]="{city: this.city,country: this.country}"
+          [queryParams]="{city: this.formCity,country: this.formCountry}"
         > 
           Check Dashboard
         </a>

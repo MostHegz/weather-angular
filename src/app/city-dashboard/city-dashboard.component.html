@@ -1,6 +1,29 @@
-<h1>{{city}}, {{country}}</h1>
+<mat-spinner *ngIf="!monthlyTemp.length"></mat-spinner>
 
-<app-line-chart 
-    [dataset]="monthlyTemp" 
-    [extraSpace]="0.1"
-></app-line-chart>
+
+<div *ngIf="monthlyTemp.length">
+    <h1 class="row">{{city}}, {{country}}</h1>
+    <mat-button-toggle-group 
+        [(value)] = "selectedButton"
+        #group="matButtonToggleGroup" 
+        (change)="selectionChanged($event)"
+        class="row"
+    >
+        <!-- <mat-button-toggle value="hourly">
+            Hourly
+        </mat-button-toggle> -->
+        <mat-button-toggle value="monthly" class="col-2">
+            Monthly Maximum Average
+        </mat-button-toggle>
+        <mat-button-toggle value="monthlyAvg" class="col-2">
+            Monthly Minimum Average
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+    <h2></h2>
+    <app-line-chart 
+        #chartRef
+        [dataset]="chartedData" 
+        [extraSpace]="0.1"
+        class="row"
+    ></app-line-chart>
+</div>
