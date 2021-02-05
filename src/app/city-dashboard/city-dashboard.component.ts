@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { CurrentCondition } from "src/types/CurrentConditions.interface";
 import { LocationService } from "../services/location.service";
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { map, switchMap } from "rxjs/operators";
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from "rxjs/operators";
 import { WeatherData } from "src/types/WeatherData.Interface";
 import { AverageClimateData } from "src/types/AverageClimateData.interface";
 import { DayWeather } from "src/types/dayWeather.interface";
@@ -18,7 +18,8 @@ export class CityDashboardComponent{
     city: string='';
     currentCondition= {} as CurrentCondition;
     wholeDaysWeather ={} as DayWeather[];
-    monthlyClimateAverages= {} as MonthlyClimate[];
+    // monthlyClimateAverages= {} as MonthlyClimate[];
+    monthlyTemp= {} as {x: number, y: number}[]
 
     constructor(
         private location: LocationService, 
@@ -38,14 +39,15 @@ export class CityDashboardComponent{
         ).subscribe(data =>{
             this.setLocation(data)
             this.setCurrentConditions(data);
-            this.setMonthlyClimateAverages(data);
+            // this.setMonthlyClimateAverages(data);
+            this.setMonthlyTemp(data);
             this.setWholeDaysWeather(data)
         });
     };
 
-    setMonthlyClimateAverages(data: AverageClimateData){
-        this.monthlyClimateAverages = data.data.ClimateAverages[0].month;
-    }
+    // setMonthlyClimateAverages(data: AverageClimateData){
+    //     this.monthlyClimateAverages = data.data.ClimateAverages[0].month;
+    // }
     setWholeDaysWeather(data:AverageClimateData){
         this.wholeDaysWeather = data.data.weather;
     }
@@ -57,5 +59,14 @@ export class CityDashboardComponent{
         this.currentCondition = weatherData.data.current_condition[0];
         // this.weatherIconUrl = weatherData.data.current_condition[0].weatherIconUrl[0].value;
         // this.weatherDescription = weatherData.data.current_condition[0].weatherDesc[0].value;
+    }
+    setMonthlyTemp(data: AverageClimateData){
+        this.monthlyTemp = data.data.ClimateAverages[0].month.map((element: MonthlyClimate)=>{
+            return( {
+                x: parseInt(element.index),
+                y: parseInt(element.avgMaxTemp),
+                // minTemp: parseInt(element.avgMinTemp),
+            })
+        })
     }
 }
