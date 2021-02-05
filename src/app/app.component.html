@@ -3,6 +3,12 @@
 <!-- <a routerLink="/">Home</a>
 <a routerLink="/city">City Dashboard</a> -->
 
-<!-- <app-navbar></app-navbar> -->
-
+<mat-toolbar color="primary">
+    <div [routerLink]="['/']" class="brand">
+        <button    mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        </button>
+        <span>Weather</span>
+    </div>
+</mat-toolbar>
 <router-outlet></router-outlet>

@@ -1,65 +1,76 @@
-<div 
-    [ngClass]="(currentCondition.isdaytime==='yes')?'day':(currentCondition.isdaytime==='no')? 'night' : 'loading'" 
-    id="divWeatherMain"
-> 
-    <div  class="weatherWidgetRow">
-        <img [src]="weatherIconUrl">
-    </div>   
-    
-    <!-- <div class="weatherWidgetRow cloudDiv">
-        <i class="fas fa-cloud fa-3x cloud"></i>
-    </div> -->
-    <div class="weatherWidgetRow" style="font-size: 50px;margin-top: 5px;font-weight: bold;">{{currentCondition.temp_C}}°</div>
-    <div class="weatherWidgetRow" style="font-size: 20px;margin-top: 5px;">{{weatherDescription}}</div>
-    <!-- <div class="weatherWidgetRow" style="font-size: 12px;">{{currentCondition.temp_min}}° / {{currentCondition.temp_max}}°</div> -->
-    <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{currentCondition.FeelsLikeC}}°</div>
-    <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{currentCondition.humidity}}%</div>
-    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{city}}</div>
-    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{country}}</div>
-</div>
-<div>
-  <form class="example-form">
-    <mat-form-field>
-      <mat-label>Country</mat-label>
-      <mat-select [(value)]="formCountry">
-        <mat-option *ngFor="let option of country_list" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Type City Name</mat-label>
-      <input type="text"
-              formControlName="city"
-              placeholder="Choose a City"
-              matInput
-              [value] = "city"
-              [formControl]="myControl"
-              [matAutocomplete]="auto">
-      <mat-error>Must be a valid City</mat-error>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button 
-      mat-button 
-      color="primary" 
-      (click)="updateCurrentConditions()" 
-      [disabled]="!myControl.valid"
-    > 
-      Update
-    </button>
-    <a 
-      mat-raised-button 
-      color="primary" 
-      [disabled]="!myControl.valid"
-      [routerLink]="['/dashboard']" 
-      [queryParams]="{city: this.city,country: this.country}"
-    > 
-      Check Dashboard
-    </a>
-  </form>
+<mat-spinner *ngIf="!country.length"></mat-spinner>
+
+<div *ngIf="country.length">
+  <div 
+      [ngClass]="(currentCondition.isdaytime==='yes')?'day':(currentCondition.isdaytime==='no')? 'night' : 'loading'" 
+      id="divWeatherMain"
+      class="row"
+  > 
+      <div  class="weatherWidgetRow">
+          <img [src]="weatherIconUrl">
+      </div>   
+      
+      <!-- <div class="weatherWidgetRow cloudDiv">
+          <i class="fas fa-cloud fa-3x cloud"></i>
+      </div> -->
+      <div class="weatherWidgetRow" style="font-size: 50px;margin-top: 5px;font-weight: bold;">{{currentCondition.temp_C}}°</div>
+      <div class="weatherWidgetRow" style="font-size: 20px;margin-top: 5px;">{{weatherDescription}}</div>
+      <!-- <div class="weatherWidgetRow" style="font-size: 12px;">{{currentCondition.temp_min}}° / {{currentCondition.temp_max}}°</div> -->
+      <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{currentCondition.FeelsLikeC}}°</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{currentCondition.humidity}}%</div>
+      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{city}}</div>
+      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{country}}</div>
+  </div>
+  <div class="home-options">
+    <form class="example-form">
+      <div class="row center">
+        <mat-form-field class="col-1">
+          <mat-label>Country</mat-label>
+          <mat-select [(value)]="formCountry">
+            <mat-option *ngFor="let option of country_list" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-1">
+          <mat-label>Type City Name</mat-label>
+          <input type="text"
+                  formControlName="city"
+                  placeholder="Choose a City"
+                  matInput
+                  [value] = "city"
+                  [formControl]="myControl"
+                  [matAutocomplete]="auto">
+          <mat-error>Must be a valid City</mat-error>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div>
+        <button 
+          mat-button 
+          class="home-button"
+          color="primary"
+          (click)="updateCurrentConditions()" 
+          [disabled]="!myControl.valid"
+        > 
+          Update
+        </button>
+        <a 
+          mat-raised-button 
+          class="home-button"
+          color="primary" 
+          [disabled]="!myControl.valid"
+          [routerLink]="['/dashboard']" 
+          [queryParams]="{city: this.city,country: this.country}"
+        > 
+          Check Dashboard
+        </a>
+      </div>
+    </form>
+  </div>
 </div>
   

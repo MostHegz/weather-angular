@@ -23,16 +23,15 @@ export class CountryDashboardComponent{
     //     city: new FormControl('',[Validators.required])
     // });
     myControl = new FormControl('',[Validators.required]);
-
-    country: string='';
-    formCountry: string='';
-    city: string='';
-    weatherIconUrl: string ='';
-    weatherDescription: string ='';
+    country = {} as string;
+    formCountry= {} as string;
+    city= '';
+    weatherIconUrl= {} as string;
+    weatherDescription= {} as string;
     currentCondition= {} as CurrentCondition;
     filteredOptions={} as Observable<string[]>;
     country_list = countryList;
-    selectedValue: string='';
+    selectedValue= {} as string;
     
   
     private _filter(results: searchApiInterface):searchResultInterface[] {
