@@ -7,6 +7,7 @@ import { WeatherData } from "src/types/WeatherData.Interface";
 import { AverageClimateData } from "src/types/AverageClimateData.interface";
 import { DayWeather } from "src/types/dayWeather.interface";
 import { MonthlyClimate } from "src/types/MonthlyClimate.interface";
+import { LineChartData } from "src/types/LineChartData.interface";
 @Component({
     selector: 'app-city-dashboard',
     templateUrl: './city-dashboard.component.html',
@@ -19,7 +20,7 @@ export class CityDashboardComponent{
     currentCondition= {} as CurrentCondition;
     wholeDaysWeather ={} as DayWeather[];
     // monthlyClimateAverages= {} as MonthlyClimate[];
-    monthlyTemp= {} as {x: number, y: number}[]
+    monthlyTemp= {} as LineChartData[]
 
     constructor(
         private location: LocationService, 

@@ -1,6 +1,8 @@
 
 import { Component, ViewChild, ElementRef, Input, SimpleChanges, OnChanges } from '@angular/core';
 import * as d3 from "d3";
+import { LineChartData } from 'src/types/LineChartData.interface';
+// import {Tooltip} from "d3-tip"
 
 
 @Component({
@@ -14,30 +16,30 @@ export class LineChart implements OnChanges {
   svg: any;
   g: any;
   tooltip: any;
+  total={} as number;
   margin = {} as { top: number; right: number; bottom: number; left: number; };
   contentWidth= {} as number;
   contentHeight= {} as number;
   width= {} as number;
   height= {} as number;
-  @Input() dataset= {} as {x: number, y: number}[];
+  @Input() dataset= {} as LineChartData[];
   @Input() extraSpace = 0.1 as number;
   maximumVertical ={} as number;
   minimumVertical ={} as number;
 
 
-  constructor() { }
+  constructor(){}
 
   ngOnChanges(changes: SimpleChanges):void {
     // only run when property "dataset" changed
     if (changes['dataset']) {
-        console.log('onchange',this.dataset)
         if(this.dataset.length){
             this.maximumVertical = this.findMaxDrawnVertical(this.dataset, this.extraSpace)
             this.minimumVertical = this.findMinDrawnVertical(this.dataset, this.extraSpace)
+            this.initChart();
+            this.createChart();
         }
-        this.initChart();
-        this.createChart();
-    }
+      }
   }
 
 //   ngOnInit(): void {
@@ -46,22 +48,19 @@ export class LineChart implements OnChanges {
 //     this.createChart();
 //   }
 
-    findMaxDrawnVertical(dataset: {x: number, y: number}[],extraSpace: number): number {
+    findMaxDrawnVertical(dataset: LineChartData[],extraSpace: number): number {
         const maximum = this.findMaxVerticalValue(dataset);
-        console.log(maximum)
-        return (maximum* (1 + extraSpace) )
+        return (maximum + Math.abs(extraSpace*maximum))
     }
-    findMaxVerticalValue(dataset: {x: number, y: number}[]): number{
-        console.log(dataset)
+    findMaxVerticalValue(dataset: LineChartData[]): number{
         const valuesArray = dataset.map((element) => element.y)
         return Math.max(...valuesArray)
     }
-    findMinDrawnVertical(dataset: {x: number, y: number}[],extraSpace: number): number {
+    findMinDrawnVertical(dataset: LineChartData[],extraSpace: number): number {
         const minimum = this.findMinVerticalValue(dataset);
-        console.log(minimum)
-        return (minimum* (1 - extraSpace) )
+        return (minimum - Math.abs(extraSpace*minimum))
     }
-    findMinVerticalValue(dataset: {x: number, y: number}[]): number{
+    findMinVerticalValue(dataset: LineChartData[]): number{
         const valuesArray = dataset.map((element) => element.y)
         return Math.min(...valuesArray)
     }
@@ -95,7 +94,7 @@ export class LineChart implements OnChanges {
 
     // 5. X scale will use the index of our data
     var xScale = d3.scaleLinear()
-      .domain([0, this.dataset.length]) // input
+      .domain([this.dataset[0].x, this.dataset.length]) // input
       .range([0, this.contentWidth]); // output
 
     // 6. Y scale will use the randomly generate number 
@@ -105,7 +104,7 @@ export class LineChart implements OnChanges {
 
     // 7. d3's line generator
     var line = d3.line()
-      .x(function (d, i) { return xScale(i); }) // set the x values for the line generator
+      .x(function (d: any) { return xScale(d.x); }) // set the x values for the line generator
       .y(function (d: any) { return yScale(d.y); }) // set the y values for the line generator 
       .curve(d3.curveMonotoneX) // apply smoothing to the line
 
@@ -135,15 +134,15 @@ export class LineChart implements OnChanges {
       .data(this.dataset)
       .enter().append("circle") // Uses the enter().append() method
       .attr("class", "dot") // Assign a class for styling
-      .attr("cx", function (d: any, i: any) { return xScale(i) })
+      .attr("cx", function (d: any) { return xScale(d.x) })
       .attr("cy", function (d: any) { return yScale(d.y) })
       .attr("r", 5)
-    //   .on("mouseover", 
-    //     function (a: number, b: number, c: number) {
-    //         console.log(a)
-    //         this.attr('class', 'focus')
-    //     })
-    //   .on("mouseout", function () { })
+  //     .on("mouseover", 
+  //       function (a: number, b: number, c: number) {
+  //           console.log(a)
+  //           this.tooltip.attr('class', 'focus')
+  //       })
+  //     .on("mouseout", function () { })
   }
   
 
