@@ -56,7 +56,6 @@ export class CountryDashboardComponent{
         this.currentCondition = weatherData.data.current_condition[0];
         this.weatherIconUrl = weatherData.data.current_condition[0].weatherIconUrl[0].value;
         this.weatherDescription = weatherData.data.current_condition[0].weatherDesc[0].value;
-
     }
 
     updateCurrentConditions(){

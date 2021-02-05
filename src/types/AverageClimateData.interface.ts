@@ -1,6 +1,8 @@
 import { CurrentCondition } from "./CurrentConditions.interface";
+import { DayWeather } from "./dayWeather.interface";
+import { MonthlyClimate } from "./MonthlyClimate.interface";
 
-export interface WeatherData{
+export interface AverageClimateData{
     data: {
         request: [
             {
@@ -35,6 +37,12 @@ export interface WeatherData{
                 ]
             }
         ],
-        current_condition: CurrentCondition[]
+        current_condition: CurrentCondition[],
+        weather: DayWeather[],
+        ClimateAverages: [
+            {
+                month: MonthlyClimate[]
+            }
+        ]
     }
 }

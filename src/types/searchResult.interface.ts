@@ -22,5 +22,4 @@ export interface searchResultInterface{
             value: string
         }
     ]
-
 }
