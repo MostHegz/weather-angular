@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { switchMap , share } from "rxjs/operators";
 import { IPData } from "src/types/IPData.interface";
 import { WeatherData } from "src/types/WeatherData.Interface";
@@ -39,7 +39,7 @@ export class LocationService{
 
     getSearchLocation(country: string, city: string){
         return this.http
-            .get<searchApiInterface>(`http://api.worldweatheronline.com/premium/v1/search.ashx?key=${environment.weatherApiKey}&q=${city},${country}&format=json&num_of_results=10`)
+            .get<searchApiInterface>(`http://api.worldweatheronline.com/premium/v1/search.ashx?key=${environment.weatherApiKey}&q=${city},${country}&format=json&num_of_results=50`)
     }
 }
 

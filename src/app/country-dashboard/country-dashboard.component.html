@@ -14,6 +14,7 @@
     <!-- <div class="weatherWidgetRow" style="font-size: 12px;">{{currentCondition.temp_min}}° / {{currentCondition.temp_max}}°</div> -->
     <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{currentCondition.FeelsLikeC}}°</div>
     <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{currentCondition.humidity}}%</div>
+    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{city}}</div>
     <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;font-weight: bold;">{{country}}</div>
 </div>
 <div>
@@ -43,21 +44,22 @@
       </mat-autocomplete>
     </mat-form-field>
     <button 
-      mat-raised-button 
+      mat-button 
       color="primary" 
       (click)="updateCurrentConditions()" 
       [disabled]="!myControl.valid"
     > 
       Update
     </button>
-    <button 
-      mat-button 
+    <a 
+      mat-raised-button 
       color="primary" 
       [disabled]="!myControl.valid"
-      href="https://www.google.com/"
+      [routerLink]="['/dashboard']" 
+      [queryParams]="{city: this.city,country: this.country}"
     > 
-    Check Dashboard
-    </button>
+      Check Dashboard
+    </a>
   </form>
 </div>
   
