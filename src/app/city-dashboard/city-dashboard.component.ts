@@ -8,8 +8,8 @@ import { AverageClimateData } from "src/types/AverageClimateData.interface";
 import { DayWeather } from "src/types/DayWeather.interface";
 import { MonthlyClimate } from "src/types/MonthlyClimate.interface";
 import { LineChartData } from "src/types/LineChartData.interface";
-import { Observable } from "rxjs";
-import { element } from "protractor";
+// import { Observable } from "rxjs";
+// import { element } from "protractor";
 @Component({
     selector: 'app-city-dashboard',
     templateUrl: './city-dashboard.component.html',
@@ -50,8 +50,8 @@ export class CityDashboardComponent{
         this.setChartedData(this.selectedButton)
     };
     selectionChanged(item:{value:string}) {
-        console.log("Selected value: " + item.value);
-        console.log(this.chart)
+        // console.log("Selected value: " + item.value);
+        // console.log(this.chart)
         this.setChartedData(item.value)
     }
 
@@ -65,7 +65,7 @@ export class CityDashboardComponent{
                     // minTemp: parseInt(element.avgMinTemp),
                 })
             })
-            console.log(this.chartedData)
+            // console.log(this.chartedData)
         }else if (toggleValue === "monthly") {
             this.chartedData = this.monthlyTemp
         }else if (toggleValue === "monthlyAvg") {
